@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	db := database.ConnectDB2()
+	db := database.ConnectDB()
 	defer db.Close(context.Background())
 
 	var id int

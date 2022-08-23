@@ -14,7 +14,7 @@ const (
 	// urlExample:="postgres://username:password@localhost:5432/database_name"
 )
 
-func ConnectDB2() *pgx.Conn {
+func ConnectDB() *pgx.Conn {
 
 	db, err := pgx.Connect(context.Background(), dbSource)
 	if err != nil {

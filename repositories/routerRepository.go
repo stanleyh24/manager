@@ -2,12 +2,10 @@ package repositories
 
 import (
 	"context"
-	"fmt"
-	"os"
-
-	"github.com/stanleyh24/manager/models"
+	"log"
 
 	"github.com/stanleyh24/manager/database"
+	"github.com/stanleyh24/manager/models"
 )
 
 /* type router interface {
@@ -17,30 +15,48 @@ import (
 	Update(id int, r models.Router) (*models.Router, error)
 	Delete(id int) error
 } */
+const (
+	createRouter = `INSERT INTO router (ip,name,username,password) VALUES ($1, $2, $3, $4) RETURNING id, ip, name, username, password`
 
-func Getall() (models.Routers, error) {
+	getRouter = `SELECT id, ip, name, username, password FROM router WHERE id = $1 LIMIT 1`
 
-	db := database.ConnectDB2()
+	listRouter   = `SELECT id, ip, name, username, password FROM router ORDER BY id`
+	deleteRouter = `DELETE FROM router WHERE id = $1`
+
+	updateRouter = `UPDATE router set ip = $2,name= $3,username= $4,password= $5 WHERE id = $1 RETURNING id, ip, name, username, password`
+)
+
+func Getall() ([]models.Router, error) {
+	db := database.ConnectDB()
 	defer db.Close(context.Background())
 
-	var id int
-	var ip string
-	err := db.QueryRow(context.Background(), "select id, ip from router where id=$1", 58).Scan(&id, &ip)
+	rows, err := db.Query(context.Background(), listRouter)
+
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "QueryRow failed: %v\n", err)
-		os.Exit(1)
+		log.Println(err)
+	}
+	var routerlist []models.Router
+	for rows.Next() {
+		var r models.Router
+
+		err := rows.Scan(&r.ID, &r.Ip, &r.Name, &r.Username, &r.Password)
+
+		if err != nil {
+			log.Println("Error while scan rows")
+			return nil, err
+
+		}
+		routerlist = append(routerlist, r)
 	}
 
-	fmt.Println(id, ip)
-
-	return nil, nil
+	return routerlist, nil
 }
 
 func Getbyid(id int) (*models.Router, error) {
 	return nil, nil
 }
 
-func Create(r models.Createrouter) (*models.Router, error) {
+func Create(r models.CreateRouterParams) (*models.Router, error) {
 	return nil, nil
 }
 

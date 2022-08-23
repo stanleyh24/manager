@@ -8,11 +8,9 @@ type Router struct {
 	Password string `json:"password"`
 }
 
-type Createrouter struct {
+type CreateRouterParams struct {
 	Ip       string `json:"ip"`
 	Name     string `json:"name"`
 	Username string `json:"username"`
 	Password string `json:"password"`
 }
-
-type Routers []*Router
