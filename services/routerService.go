@@ -7,7 +7,7 @@ import (
 	"github.com/stanleyh24/manager/repositories"
 )
 
-func GetAllRouter() (models.Routers, error) {
+func GetAllRouter() ([]models.Router, error) {
 	routers, err := repositories.Getall()
 
 	if err != nil {

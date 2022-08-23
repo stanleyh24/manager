@@ -1,15 +1,15 @@
 package main
 
 import (
-	"context"
 	"fmt"
-	"os"
+	"log"
 
-	"github.com/stanleyh24/manager/database"
+	"github.com/stanleyh24/manager/api"
+	"github.com/stanleyh24/manager/services"
 )
 
 func main() {
-	db := database.ConnectDB()
+	/* db := database.ConnectDB()
 	defer db.Close(context.Background())
 
 	var id int
@@ -20,5 +20,14 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Println(id, ip)
+	fmt.Println(id, ip) */
+
+	routers, err := services.GetAllRouter()
+	if err != nil {
+		log.Println(err)
+	}
+
+	fmt.Println(routers)
+
+	api.Server()
 }
