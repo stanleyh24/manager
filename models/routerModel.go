@@ -1,7 +1,7 @@
 package models
 
 type Router struct {
-	ID       int32  `json:"id"`
+	ID       int    `json:"id"`
 	Ip       string `json:"ip"`
 	Name     string `json:"name"`
 	Username string `json:"username"`

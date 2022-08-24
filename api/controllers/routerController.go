@@ -21,16 +21,5 @@ func GetRouters() gin.HandlerFunc {
 func GetRouter() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		/* routerId := c.Param("router_id")
-		var router models.Router
-
-		//err := foodCollection.FindOne(ctx, bson.M{"food_id": foodId}).Decode(&food)
-
-
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "error occured while fetching the food item"})
-		}
-
-		c.JSON(http.StatusOK, food) */
 	}
 }
