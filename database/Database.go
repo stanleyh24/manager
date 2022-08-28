@@ -5,18 +5,15 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/jackc/pgx/v4"
+	"github.com/jackc/pgx/v4/pgxpool"
 )
 
-const (
-	dbDriver = "postgres"
-	dbSource = "postgres://root:asd24690@localhost:5432/clientmanager?sslmode=disable"
-	// urlExample:="postgres://username:password@localhost:5432/database_name"
-)
+const dbSource = "postgres://root:asd24690@localhost:5432/clientmanager?sslmode=disable"
 
-func ConnectDB() *pgx.Conn {
+func ConnectDB() *pgxpool.Pool {
 
-	db, err := pgx.Connect(context.Background(), dbSource)
+	//db, err := pgx.Connect(context.Background(), dbSource)
+	db, err := pgxpool.Connect(context.Background(), dbSource)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
 		os.Exit(1)
