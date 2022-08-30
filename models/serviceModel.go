@@ -6,3 +6,9 @@ type Service struct {
 	Price int    `json:"price"`
 	Rate  string `json:"rate"`
 }
+
+type CreateServiceParams struct {
+	Name  string `json:"name"`
+	Price int    `json:"price"`
+	Rate  string `json:"rate"`
+}

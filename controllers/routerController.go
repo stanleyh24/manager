@@ -79,7 +79,9 @@ func GetRouterById(w http.ResponseWriter, r *http.Request) {
 	err = db.QueryRow(context.Background(), getRouter, ID).Scan(&router.ID, &router.Ip, &router.Name, &router.Username, &router.Password)
 
 	if err != nil {
-		log.Println(err)
+		msg := fmt.Sprintf("not found router with ID %s", routerId)
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte(msg))
 		return
 	}
 
