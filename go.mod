@@ -3,7 +3,7 @@ module github.com/stanleyh24/manager
 go 1.18
 
 require (
-	github.com/gin-gonic/gin v1.8.1
+
 	github.com/jackc/pgx/v4 v4.17.0
 )
 
